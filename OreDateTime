@@ -1,0 +1,54 @@
+WindowTitle {DateTime}
+WindowSize  120 35
+Font "-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*"
+
+Init
+ Begin
+  Set $Time = (GetOutput {exec date "+%H:%M"} 1 -1)
+  Set $Date = (GetOutput {exec date "+%m/%d %a"} 1 -1)
+
+  ChangeTitle 1 $Time
+  ChangeTitle 2 $Date
+End
+
+PeriodicTasks
+ Begin 
+  If (RemainderOfDiv (GetTime) 15)==0 Then
+  Begin
+   Set $Time = (GetOutput {exec date "+%H:%M"} 1 -1)
+   Set $Date = (GetOutput {exec date "+%m/%d %a"} 1 -1)
+
+   ChangeTitle 1 $Time
+   ChangeTitle 2 $Date
+  End
+End
+
+Widget 1
+Property
+ Position 0 0
+ Size 120 20
+ Font "-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*"
+ Type ItemDraw
+ Flags NoReliefString
+ Title {}
+Main
+ Case message of
+  SingleClic :
+  Begin
+  End
+End
+
+Widget 2
+Property
+ Position 0 20
+ Size 120 15
+ Font "-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*"
+ Type ItemDraw
+ Flags NoReliefString
+ Title {}
+Main
+ Case message of
+  SingleClic :
+  Begin
+  End
+End
