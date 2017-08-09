@@ -154,7 +154,7 @@ AddToFunc   ChangeDesk
 + I SendToModule FvwmButtons ChangeButton desk3 Colorset 10
 + I SendToModule FvwmButtons ChangeButton desk$0 Colorset 11
 
-#####
+###### {{{ Pack Window Move
 # Name:     PackWindowLeft
 # Bound:    Alt+Shift+Left When a window is active
 # Purpose:  See PackWindowUp.
@@ -286,8 +286,8 @@ AddToFunc   ChangeDesk
 #
 # DestroyFunc PackWrapperUp
 # AddToFunc PackWrapperUp
-# + I NoWindow PackWindowUp $[w.y] $[w.x] $[w.width] $[w.id]
-#
+# + I NoWindow PackWindowUp $[w.y] $[w.x] $[w.width] $[w.id]# }}}
+
 DestroyFunc OreStartMaximized
 AddToFunc OreStartMaximized
 + I Exec exec $0
@@ -316,11 +316,11 @@ AddToFunc OreMaximizeRaiseLower
 DestroyFunc Ore-SuperL-E
 AddToFunc   Ore-SuperL-E
 + I OreUnbind-All
-+ I Key t A A OreExecUnbind mlterm
-+ I Key f A A OreExecUnbind firefox
-+ I Key k A A OreExecUnbind keepassx
-+ I Key question A A OreMenu OreHelp-Ore-SuperL-E
-+ I key Escape A A OreUnbind-All
++ I Key t A n OreExecUnbind mlterm
++ I Key f A n OreExecUnbind firefox
++ I Key k A n OreExecUnbind keepassx
++ I Key question A n OreMenu OreHelp-Ore-SuperL-E
++ I key Escape   A n OreUnbind-All
 + I Schedule 2000 OreUnbind-All
 
 DestroyFunc OreMenu
@@ -335,58 +335,28 @@ AddToFunc   OreExecUnbind
 
 DestroyFunc Ore-SuperL-W
 AddToFunc   Ore-SuperL-W
-+ I Key right WFST A OreMoveUnbind right -0  w
-+ I Key  left WFST A OreMoveUnbind left  0  w
-+ I Key    up WFST A OreMoveUnbind up  w  0
-+ I Key  down WFST A OreMoveUnbind down  w -0
-+ I key bracketright WFST A OreMoveToPageUnbind +1p bracketright
-+ I key bracketleft  WFST A OreMoveToPageUnbind -1p bracketleft
-+ I Key m WFST A OreMaximizeRaiseLowerUnbind m
-+ I key t WFST A OreRaiseLowerUnbind
-+ I Key question WFST A OreMenu OreHelp-Ore-SuperL-W
-+ I key Escape WFST   A OreUnbind-All
++ I Key right WFST n OreMoveUnbind right -0  w
++ I Key  left WFST n OreMoveUnbind left  0  w
++ I Key    up WFST n OreMoveUnbind up  w  0
++ I Key  down WFST n OreMoveUnbind down  w -0
++ I key bracketright WFST n OreMoveToPageUnbind +1p bracketright
++ I key bracketleft  WFST n OreMoveToPageUnbind -1p bracketleft
++ I Key m WFST n OreMaximizeRaiseLowerUnbind m
++ I key t WFST n OreRaiseLowerUnbind
++ I key s WFST n OreStickUnbind
++ I Key question WFST n OreMenu OreHelp-Ore-SuperL-W
++ I key Escape WFST   n OreUnbind-All
 + I Schedule 2000 OreUnbind-All
 
-DestroyFunc OreRaiseLowerUnbind 
-AddtoFunc   OreRaiseLowerUnbind 
-+ I RaiseLower
+DestroyFunc OreStickUnbind
+AddToFunc   OreStickUnbind
++ I Stick
 + I OreUnbind-All
 
-DestroyFunc OreUnbind-All
-AddToFunc   OreUnbind-All
-+ I DeSchedule 
-# Super-E
-+ I Key t        A A -
-+ I Key f        A A -
-+ I Key k        A A -
-+ I Key question A A -
-+ I key Escape   A A -
-# Super-W
-+ I Key right        WFST A -
-+ I Key left         WFST A -
-+ I Key up           WFST A -
-+ I Key down         WFST A -
-+ I key bracketright WFST A -
-+ I key bracketleft  WFST A -
-+ I Key m            WFST A -
-+ I key t            WFST A -
-+ I Key question WFST A OreMenu OreHelp-Ore-SuperL-W
-+ I Key question     WFST A -
-+ I key Escape       WFST A -
-# Super-N
-+ I key n            A A -
-+ I key p            A A -
-+ I key bracketright A A -
-+ I key bracketleft  A A -
-+ I key h            A A -
-+ I key l            A A -
-+ I key Next         A A -
-+ I key Prior        A A -
-+ I key f A C -
-+ I key b A C -
-# Duplicated
-# + I Key question     A A -
-# + I key Escape       A A -
+DestroyFunc OreRaiseLowerUnbind 
+AddToFunc   OreRaiseLowerUnbind 
++ I RaiseLower
++ I OreUnbind-All
 
 DestroyFunc OreMaximizeRaiseLowerUnbind
 AddToFunc OreMaximizeRaiseLowerUnbind
@@ -408,17 +378,51 @@ AddToFunc   OreMoveToPageUnbind
 DestroyFunc Ore-SuperL-N
 AddToFunc Ore-SuperL-N
 + I OreUnbind-All
-+ I key n    A A     OreFocusRaiseUnbind Next
-+ I key p    A A     OreFocusRaiseUnbind Prev
-+ I key Next  A A OreGotoPageUnbind 0 +1p
-+ I key Prior A A OreGotoPageUnbind 0 -1p
-+ I key f A C     OreGotoPageUnbind 0 +1p
-+ I key b A C     OreGotoPageUnbind 0 -1p
-+ I key h A A OreDirectionFocusRaiseUnbind West
-+ I key l A A OreDirectionFocusRaiseUnbind East
-+ I Key question A A     OreMenu OreHelp-Ore-SuperL-N
-+ I key Escape   A A     OreUnbind-All
++ I key n        A n OreFocusRaiseUnbind          Next
++ I key p        A n OreFocusRaiseUnbind          Prev
++ I key Next     A n OreGotoPageUnbind            0 +1p
++ I key Prior    A n OreGotoPageUnbind            0 -1p
++ I key f        A C OreGotoPageUnbind            0 +1p
++ I key b        A C OreGotoPageUnbind            0 -1p
++ I key h        A n OreDirectionFocusRaiseUnbind West
++ I key l        A n OreDirectionFocusRaiseUnbind East
++ I Key question A n OreMenu                      OreHelp-Ore-SuperL-N
++ I key Escape   A n OreUnbind-All
 + I Schedule 2000 OreUnbind-All
+
+DestroyFunc OreUnbind-All
+AddToFunc   OreUnbind-All
++ I DeSchedule 
+# Super-E
++ I Key t        A n -
++ I Key f        A n -
++ I Key k        A n -
++ I Key question A n -
++ I key Escape   A n -
+# Super-W
++ I Key right        WFST n -
++ I Key left         WFST n -
++ I Key up           WFST n -
++ I Key down         WFST n -
++ I key bracketright WFST n -
++ I key bracketleft  WFST n -
++ I Key m            WFST n -
++ I key t            WFST n -
++ I key s            WFST n -
++ I Key question     WFST n -
++ I key Escape       WFST n -
+# Super-N
++ I key n            A n -
++ I key p            A n -
++ I key Next         A n -
++ I key Prior        A n -
++ I key f A C -
++ I key b A C -
++ I key h A n -
++ I key l A n -
+# Duplicated
+# + I Key question     A A -
+# + I key Escape       A A -
 
 DestroyFunc OreDirectionFocusRaiseUnbind
 AddToFunc   OreDirectionFocusRaiseUnbind
@@ -914,3 +918,4 @@ DestroyModuleConfig OreMenuKeyBind: *
 *OreMenuKeyBind: focus_change OreRootMenu
 Module FvwmEvent OreMenuKeyBind
 
+# vim: set fdm=marker : 

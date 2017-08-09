@@ -23,8 +23,11 @@
 # Super_R (windows key) will launch a terminal.
 #
 # Silent supresses any errors (such as keyboards with no Menu key).
+#
+# Menu key is bound by FvwmEvent OreMenuKeyBind
 # Silent Key F1 A M Menu MenuFvwmRoot
-Silent Key Menu A A Menu MenuFvwmRoot
+
+Silent Key Menu A 4 Menu MenuFvwmRoot
 Silent Key Tab A M WindowList Root c c NoDeskSort, SelectOnRelease Meta_L
 # Silent Key F1 A C GotoDesk 0 0
 # Silent Key F2 A C GotoDesk 0 1
