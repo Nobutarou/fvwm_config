@@ -575,7 +575,7 @@ AddToMenu   MenuFvwmRoot "Fvwm" Title
 + "" Nop
 + "Refresh%icons/refresh.png%" Refresh
 + "Restart%icons/restart.png%" Restart
-+ "Quit%icons/quit.png%" Module FvwmScript FvwmScript-ConfirmQuit
++ "Quit%icons/quit.png%" Module FvwmScript OreScript-ConfirmQuit
 
 # Generate XDGMenu
 PipeRead "fvwm-menu-desktop"
@@ -910,12 +910,13 @@ DestroyModuleConfig EventNewDesk:*
 *FvwmFormDefault: Colorset 10
 *FvwmFormDefault: ItemColorset 13
 
-# *FvwmScript: DefaultColorset 8
+*FvwmScript: DefaultFont "-mplus-gothic-medium-r-normal--10-*"
 
 # When focus is changed, call OreRootMenu to change Menu key binding
 DestroyModuleConfig OreMenuKeyBind: *
 *OreMenuKeyBind: Cmd Function
 *OreMenuKeyBind: focus_change OreRootMenu
 Module FvwmEvent OreMenuKeyBind
+
 
 # vim: set fdm=marker : 
