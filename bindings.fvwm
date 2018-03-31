@@ -52,11 +52,23 @@ Silent Key Tab A M WindowList Root c c NoDeskSort, SelectOnRelease Meta_L
 # Key t                     A 4 OreStartMaximized mlterm
 # Key f                     A 4 Exec exec $[InfoStore.orebrowser]
 # Key k                     A 4 Exec exec $[InfoStore.orekeepass]
-key XF86MonBrightnessDown A A Exec exec sudo   /usr/local/sbin/backlightmiddle
-key XF86MonBrightnessUp   A A Exec exec sudo   /usr/local/sbin/backlightbright
-key XF86AudioLowerVolume  A A Exec exec amixer set Master 5%-
-key XF86AudioRaiseVolume  A A Exec exec amixer set Master 5%+
-key XF86AudioMute         A A Exec exec amixer -D  pulse  sset Master toggle
+#
+# When I use startx from tty, pushing XF86MonBrightness* hangs some keys and
+# mouse buttons. To avoid them, I use menu key instead.
+key XF86MonBrightnessDown A A Exec exec sudo /usr/local/sbin/backlight -10
+key XF86MonBrightnessUp   A A Exec exec sudo /usr/local/sbin/backlight +10
+# key F5 A 4 Exec exec sudo /usr/local/sbin/backlight -10
+# key F6 A 4 Exec exec sudo /usr/local/sbin/backlight +10 
+key XF86AudioLowerVolume  A A Exec exec pactl set-sink-volume 0 -5%
+key XF86AudioRaiseVolume  A A Exec exec pactl set-sink-volume 0 +5%
+key XF86AudioMute         A A Exec exec pactl set-sink-mute 0 toggle
+key r A 4  Exec exec $HOME/.local/bin/rofi-pass
+key x A 4 Exec exec sflock -f -mplus-gothic-medium-r-normal--12-120-75-75-c-60-iso8859-1 
+#
+# Change alsa to Pulse
+# key XF86AudioLowerVolume  A A Exec exec amixer set Master 5%-
+# key XF86AudioRaiseVolume  A A Exec exec amixer set Master 5%+
+# key XF86AudioMute         A A Exec exec amixer -D  pulse  sset Master toggle
 
 key E A 4 Ore-SuperL-E
 key w A 4 Ore-SuperL-W

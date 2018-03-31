@@ -1,6 +1,6 @@
 WindowTitle {ConfirmQuit}
 WindowSize  300 80
-Font "-mplus-gothic-medium-r-normal--12-*""
+Font '-mplus-gothic-medium-r-normal--12-*''
 Init
  Begin
  End

@@ -199,7 +199,7 @@ AddToFunc   ChangeDesk
 # DestroyFunc PackSetHighW
 # AddToFunc PackSetHighW
 # + I SetEnv high_w $[vp.height]
-# + I All (CurrentPage,!Iconic,AcceptsFocus,!Shaded) \
+# + I All (CurrentPage,!iconic,AcceptsFocus,!Shaded) \
 # 	PipeRead "test $[w.y] -lt $high_w \
 #         -a $[w.y] -gt `expr $0 + $4`  \
 #         -a \\( \\( $[w.x] -ge $1 -a $[w.x] -lt `expr $1 + $2` \\) \
@@ -316,7 +316,7 @@ AddToFunc OreMaximizeRaiseLower
 DestroyFunc Ore-SuperL-E
 AddToFunc   Ore-SuperL-E
 + I OreUnbind-All
-+ I Key t A n OreExecUnbind mlterm
++ I Key t A n OreExecUnbind "mlterm"
 + I Key f A n OreExecUnbind firefox
 + I Key k A n OreExecUnbind keepassx
 + I Key question A n OreMenu OreHelp-Ore-SuperL-E
@@ -500,7 +500,7 @@ Style * SloppyFocus, MouseFocusClickRaises
 # Default Font
 # DefaultFont "xft:Noto Sans CJK JP:Bold:size=8:antialias=True"
 # DefaultFont "-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*"
-DefaultFont "-mplus-gothic-medium-r-normal--10-*"
+DefaultFont '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
 # Window Placement
 Style * TileCascadePlacement, GrabFocusOff, !UsePPosition
 
@@ -541,6 +541,8 @@ Style FvwmIdent WindowListSkip
 
 # Ore Styles
 Style Zathura MiniIcon acroread.svg:18x18
+Style Hacknet !Borders
+Style mlterm MiniIcon terminal.png
 
 #######
 # 3: Colorsets
@@ -555,7 +557,7 @@ MenuStyle * MenuColorset 5, ActiveColorset 6, GreyedColorset 7, TitleColorset 8
 MenuStyle * Hilight3DOff, HilightBack, HilightTitleBack, SeparatorsLong
 MenuStyle * TrianglesSolid, TrianglesUseFore
 MenuStyle * ItemFormat "%|%3.1i%5.3l%5.3>%|"
-MenuStyle * Font "-mplus-gothic-medium-r-normal--10-*"
+MenuStyle * Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
 
 # Root Menu
 #
@@ -779,7 +781,7 @@ AddToDecor   FvwmDecor
 # a window. One use is getting the class/resource/name of a window.
 DestroyModuleConfig FvwmIdent:*
 *FvwmIdent: Colorset 10
-*FvwmIdent: Font "-mplus-gothic-medium-r-normal--10-*"
+*FvwmIdent: Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
 
 # FvwmBanner
 #
@@ -814,7 +816,7 @@ DestroyModuleConfig RightPanel:*
 *RightPanel: Rows $[vp.height]
 *RightPanel: Columns 60
 *RightPanel: Frame 0
-*RightPanel: Font "-mplus-gothic-medium-r-normal--10-*"
+*RightPanel: Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
 # *RightPanel: (120x45, Icon "fvwm-logo-small.png", Frame 0)
 # *RightPanel: (120x5, Frame 0)
 # *RightPanel: (10x20, Frame 0)
@@ -827,9 +829,9 @@ DestroyModuleConfig RightPanel:*
 # *RightPanel: (25x20, Id desk2, Title "2", Action (Mouse 1) GotoDesk 0 2, ActiveColorset 12, Frame 0)
 # *RightPanel: (25x20, Id desk3, Title "3", Action (Mouse 1) GotoDesk 0 3, ActiveColorset 12, Frame 0)
 # *RightPanel: (10x20, Frame 0)
-*RightPanel: (2x120, Frame 0)
-*RightPanel: (56x120, Swallow FvwmPager 'Module FvwmPager *', Frame 0)
-*RightPanel: (2x120, Frame 0)
+*RightPanel: (2x60, Frame 0)
+*RightPanel: (56x60, Swallow FvwmPager 'Module FvwmPager *', Frame 0)
+*RightPanel: (2x60, Frame 0)
 # *RightPanel: (5x80, Frame 0)
 # *RightPanel: (110x80, Swallow FvwmPager 'Module FvwmPager *', Frame 0)
 # *RightPanel: (5x80, Frame 0)
@@ -837,16 +839,16 @@ DestroyModuleConfig RightPanel:*
 # Test (x stalonetray) *RightPanel: (60x30, Swallow(NoClose,UseOld) \
 #     stalonetray 'Exec exec stalonetray --config \
 #     "$[FVWM_DATADIR]/default-config/.stalonetrayrc"', Frame 0)
-Test (x stalonetray) PipeRead 'echo "*RightPanel: (60x$(($[vp.height]-225)), \
+Test (x stalonetray) PipeRead 'echo "*RightPanel: (60x300, \
     Top, Swallow FvwmIconMan \'Module FvwmIconMan\', Frame 0)"'
-Test (!x stalonetray) PipeRead 'echo "*RightPanel: (60x$(($[vp.height]-205)),\
-    Top, Swallow FvwmIconMan \'Module FvwmIconMan\', Frame 0)"'
+# Test (!x stalonetray) PipeRead 'echo "*RightPanel: (60x$(($[vp.height]-205)),\
+#     Top, Swallow FvwmIconMan \'Module FvwmIconMan\', Frame 0)"'
 Test (x stalonetray) *RightPanel: (60x20, Swallow(NoClose,UseOld) \
     stalonetray 'Exec exec stalonetray' , Frame 0)
 # PipeRead 'echo "*RightPanel: (60x$(($[vp.height]-205)),\
 #      Top, Swallow FvwmIconMan \'Module FvwmIconMan\', Frame 0)"'
 # *RightPanel: (60x20, Swallow(NoClose,UseOld) uim-toolbar-gtk 'Exec exec uim-toolbar-gtk')
-*RightPanel: (60x30, Swallow DateTime 'Module FvwmScript OreDateTime',\
+*RightPanel: (60x20, Swallow DateTime 'Module FvwmScript OreDateTime',\
     Frame 0)
 *RightPanel: (60x5, Frame 0)
 
@@ -861,7 +863,7 @@ DestroyModuleConfig FvwmPager:*
 *FvwmPager: WindowColorsets 10 11
 *FvwmPager: Font None
 *FvwmPager: Balloons All
-*FvwmPager: BalloonFont "-mplus-gothic-medium-r-normal--10-*"
+*FvwmPager: BalloonFont '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
 *FvwmPager: BallonYOffset +2
 *FvwmPager: Window3dBorders
 *FvwmPager: MiniIcons
@@ -881,13 +883,13 @@ DestroyModuleConfig FvwmIconMan:*
 *FvwmIconMan: DrawIcons always
 *FvwmIconMan: ReliefThickness 0
 *FvwmIconMan: Format "%t"
-*FvwmIconMan: Font "-mplus-gothic-medium-r-normal--10-*"
+*FvwmIconMan: Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
 *FvwmIconMan: Action Mouse 1 A sendcommand IconManClick
 *FvwmIconMan: Action Mouse 2 A sendcommand Nop
 *FvwmIconMan: Action Mouse 3 A sendcommand "Menu MenuIconOps"
 *FvwmIconMan: Resolution global
 *FvwmIconMan: Tips needed
-*FvwmIconMan: TipsFont "-mplus-gothic-medium-r-normal--10-*"
+*FvwmIconMan: TipsFont '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
 *FvwmIconMan: TipsDelays 0 0
 *FvwmIconMan: Sort id
 *FvwmIconMan: Title "" 
@@ -910,7 +912,7 @@ DestroyModuleConfig EventNewDesk:*
 *FvwmFormDefault: Colorset 10
 *FvwmFormDefault: ItemColorset 13
 
-*FvwmScript: DefaultFont "-mplus-gothic-medium-r-normal--10-*"
+*FvwmScript: DefaultFont '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
 
 # When focus is changed, call OreRootMenu to change Menu key binding
 DestroyModuleConfig OreMenuKeyBind: *
