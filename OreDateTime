@@ -1,14 +1,20 @@
 WindowTitle {DateTime}
-WindowSize  120 35
-Font "-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*"
+WindowSize  120 65
+Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
 
 Init
  Begin
   Set $Time = (GetOutput {exec date "+%H:%M"} 1 -1)
   Set $Date = (GetOutput {exec date "+%m/%d %a"} 1 -1)
+  Set $Battery = (GetOutput {exec ~/.local/bin/batterycheck} 1 -1)
+  Set $Network = (GetOutput {exec ~/.local/bin/networkcheck} 1 -1)
+  Set $Load = (GetOutput {exec ~/.local/bin/load} 1 -1)
 
   ChangeTitle 1 $Time
   ChangeTitle 2 $Date
+  ChangeTitle 3 $Battery
+  ChangeTitle 4 $Network
+  ChangeTitle 5 $Load
 End
 
 PeriodicTasks
@@ -17,17 +23,23 @@ PeriodicTasks
   Begin
    Set $Time = (GetOutput {exec date "+%H:%M"} 1 -1)
    Set $Date = (GetOutput {exec date "+%m/%d %a"} 1 -1)
+  Set $Battery = (GetOutput {exec ~/.local/bin/batterycheck} 1 -1)
+  Set $Network = (GetOutput {exec ~/.local/bin/networkcheck} 1 -1)
+  Set $Load = (GetOutput {exec ~/.local/bin/load} 1 -1)
 
    ChangeTitle 1 $Time
    ChangeTitle 2 $Date
+  ChangeTitle 3 $Battery
+  ChangeTitle 4 $Network
+  ChangeTitle 5 $Load
   End
 End
 
 Widget 1
 Property
  Position 0 0
- Size 120 20
- Font "-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*"
+ Size 120 12
+  Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
  Type ItemDraw
  Flags NoReliefString
  Title {}
@@ -40,9 +52,54 @@ End
 
 Widget 2
 Property
- Position 0 20
- Size 120 15
- Font "-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*"
+ Position 0 12
+ Size 120 12
+  Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
+ Type ItemDraw
+ Flags NoReliefString
+ Title {}
+Main
+ Case message of
+  SingleClic :
+  Begin
+  End
+End
+
+Widget 3
+Property
+ Position 0 24
+ Size 120 12
+  Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
+ Type ItemDraw
+ Flags NoReliefString
+ Title {}
+Main
+ Case message of
+  SingleClic :
+  Begin
+  End
+End
+
+Widget 4
+Property
+ Position 0 36
+ Size 120 12
+  Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
+ Type ItemDraw
+ Flags NoReliefString
+ Title {}
+Main
+ Case message of
+  SingleClic :
+  Begin
+  End
+End
+
+Widget 5
+Property
+ Position 0 48
+ Size 120 12
+  Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
  Type ItemDraw
  Flags NoReliefString
  Title {}

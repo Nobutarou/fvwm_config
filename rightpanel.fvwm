@@ -1,0 +1,79 @@
+# FvwmButtons - RightPanel
+#
+# Note - To use the system tray you must have "stalonetray" installed.
+DestroyModuleConfig RightPanel:*
+*RightPanel: Geometry 60x$[vp.height]-0+0
+# I want to calculate vp.height-50 but I don't know the syntax.
+#*RightPanel: Geometry 60x720-0+0
+*RightPanel: Colorset 10
+# I describe in percentage to make clearer.
+*RightPanel: Rows 100
+*RightPanel: Columns 100
+*RightPanel: Frame 0
+*RightPanel: Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
+#*RightPanel: (100x5, Top, Swallow FvwmPager 'Module FvwmPager *', Frame 0)
+# *RightPanel: (2x30, Frame 0)
+# *RightPanel: (60x5, Frame 0)
+# *RightPanel: (60x$(($[vp.height]-235)), Top, Swallow FvwmIconMan 'Module FvwmIconMan', Frame 0)
+*RightPanel: (100x75, Top, Swallow FvwmIconMan 'Module FvwmIconMan', Frame 0)
+# Test (x stalonetray) PipeRead 'echo "*RightPanel: (60x300, \
+#     Top, Swallow FvwmIconMan \'Module FvwmIconMan\', Frame 0)"'
+# *RightPanel: (120x515, Top, Swallow FvwmIconMan 'Module FvwmIconMan', Frame 0)
+# Test (!x stalonetray) PipeRead 'echo "*RightPanel: (60x$(($[vp.height]-205)),\
+#     Top, Swallow FvwmIconMan \'Module FvwmIconMan\', Frame 0)"'
+#Test (x uim-toolbar-gtk3) *RightPanel: (100x10, Bottom, Swallow(NoClose,UseOld) \
+#    uim-toolbar-gtk3 'Exec exec uim-toolbar-gtk3' , Frame 0)
+Test (x stalonetray) *RightPanel: (100x5, Bottom, Swallow(NoClose,UseOld) \
+    stalonetray 'Exec exec stalonetray' , Frame 0)
+# PipeRead 'echo "*RightPanel: (60x$(($[vp.height]-205)),\
+#      Top, Swallow FvwmIconMan \'Module FvwmIconMan\', Frame 0)"'
+# *RightPanel: (60x20, Swallow(NoClose,UseOld) uim-toolbar-gtk 'Exec exec uim-toolbar-gtk')
+*RightPanel: (100x10, Bottom, Swallow DateTime 'Module FvwmScript OreDateTime',\
+    Frame 0)
+# *RightPanel: (60x5, Frame 0)
+
+# FvwmPager
+#
+# This module displays the location of the windows on the various Pages
+# and Desks. This is setup to show only the Pages on the current Desk.
+DestroyModuleConfig FvwmPager:*
+*FvwmPager: Colorset * 10
+*FvwmPager: HilightColorset * 13
+*FvwmPager: BalloonColorset * 10
+*FvwmPager: WindowColorsets 10 11
+*FvwmPager: Font None
+*FvwmPager: Balloons All
+*FvwmPager: BalloonFont '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
+*FvwmPager: BallonYOffset +2
+*FvwmPager: Window3dBorders
+*FvwmPager: MiniIcons
+
+# FvwmIconMan
+#
+# FvwmIconMan is a powerful tool to list and manage windows. This
+# is used as the window list in the panel or taskbar.
+DestroyModuleConfig FvwmIconMan:*
+*FvwmIconMan: UseWinList true
+#*FvwmIconMan: ButtonGeometry 60x60
+*FvwmIconMan: ButtonGeometry 60x0
+*FvwmIconMan: Colorset 10
+*FvwmIconMan: FocusColorset 11
+*FvwmIconMan: FocusAndSelectColorset 12
+*FvwmIconMan: SelectColorset 12
+*FvwmIconMan: IconAndSelectColorset 12
+*FvwmIconMan: DrawIcons always
+*FvwmIconMan: ReliefThickness 0
+#*FvwmIconMan: Format "%t"
+*FvwmIconMan: Format "%c:%i"
+*FvwmIconMan: Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
+*FvwmIconMan: Action Mouse 1 A sendcommand IconManClick
+*FvwmIconMan: Action Mouse 2 A sendcommand Nop
+*FvwmIconMan: Action Mouse 3 A sendcommand "Menu MenuIconOps"
+*FvwmIconMan: Resolution global
+*FvwmIconMan: Tips needed
+*FvwmIconMan: TipsFont '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
+*FvwmIconMan: Action Mouse 1 A sendcommand IconManClick
+*FvwmIconMan: TipsDelays 0 0
+*FvwmIconMan: Sort id
+*FvwmIconMan: Title "" 
+*FvwmIconMan: TipsPlacement leftright 

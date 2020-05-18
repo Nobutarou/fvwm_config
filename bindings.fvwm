@@ -29,48 +29,24 @@
 
 Silent Key Menu A 4 Menu MenuFvwmRoot
 Silent Key Tab A M WindowList Root c c NoDeskSort, SelectOnRelease Meta_L
-# Silent Key F1 A C GotoDesk 0 0
-# Silent Key F2 A C GotoDesk 0 1
-# Silent Key F3 A C GotoDesk 0 2
-# Silent Key F4 A C GotoDesk 0 3
-# key right WFST 4 Move -0 w  Warp
-# key left  WFST 4 Move 0  w  Warp
-# key up    WFST 4 Move w  0  Warp
-# key down  WFST 4 Move w  -0 Warp
+key Tab A 4 Exec exec rofi -show window -font 'Ruika Mplus 18'
+key q A 4 Module FvwmScript OreScript-ConfirmQuit
 
-# key bracketright WFST 4 OreMoveToPage +1p
-# key bracketleft  WFST 4 OreMoveToPage -1p
-# key greater      A    4 OreFocusRaise Next
-# key less         A    4 OreFocusRaise Prev
-
-# key F10 WFST 4 OreMaximizeRaiseLower
-#key s WFST 4C Stick
-
-# Key Next  A 4 GotoPage 0 +1p
-# Key Prior A 4 GotoPage 0 -1p
-
-# Key t                     A 4 OreStartMaximized mlterm
-# Key f                     A 4 Exec exec $[InfoStore.orebrowser]
-# Key k                     A 4 Exec exec $[InfoStore.orekeepass]
-#
 # When I use startx from tty, pushing XF86MonBrightness* hangs some keys and
 # mouse buttons. To avoid them, I use menu key instead.
 key XF86MonBrightnessDown A A Exec exec sudo /usr/local/sbin/backlight -10
 key XF86MonBrightnessUp   A A Exec exec sudo /usr/local/sbin/backlight +10
-# key F5 A 4 Exec exec sudo /usr/local/sbin/backlight -10
-# key F6 A 4 Exec exec sudo /usr/local/sbin/backlight +10 
-key XF86AudioLowerVolume  A A Exec exec pactl set-sink-volume 0 -5%
-key XF86AudioRaiseVolume  A A Exec exec pactl set-sink-volume 0 +5%
-key XF86AudioMute         A A Exec exec pactl set-sink-mute 0 toggle
-key r A 4  Exec exec $HOME/.local/bin/rofi-pass
-key x A 4 Exec exec sflock -f -mplus-gothic-medium-r-normal--12-120-75-75-c-60-iso8859-1 
-#
-# Change alsa to Pulse
-# key XF86AudioLowerVolume  A A Exec exec amixer set Master 5%-
-# key XF86AudioRaiseVolume  A A Exec exec amixer set Master 5%+
-# key XF86AudioMute         A A Exec exec amixer -D  pulse  sset Master toggle
+key XF86AudioLowerVolume  A A Exec exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+key XF86AudioRaiseVolume  A A Exec exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+key XF86AudioMute         A A Exec exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+key r A 4  Exec exec rofi-pass
+key l A 4 Exec exec sflock -f -mplus-gothic-medium-r-normal--12-120-75-75-c-60-iso8859-1 
 
-key E A 4 Ore-SuperL-E
+key E A 4 Exec exec rofi -show run -font 'Ruika Mplus 18'
+key Left W 4 OreMoveRaise 0 
+key Right W 4 OreMoveRaise -0
+key Left W 4S Resize  direction West
+key Right W 4S Resize direction East
 key w A 4 Ore-SuperL-W
 key n A 4 Ore-SuperL-N
 key question A 4 Menu OreHelp
@@ -110,5 +86,5 @@ Mouse 1	I    A MoveClickX Move Nop Iconify
 # Mouse 3	T    A Menu MenuWindowOps
 Mouse 3	T    A RaiseLower
 Mouse 3 I    A Menu MenuIconOps
-
-
+Mouse 1 A 4 MoveClickX Resize Raise Nop
+Mouse 3 A 4 MoveClickX Move Raise Maximize
