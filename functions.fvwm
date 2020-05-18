@@ -104,7 +104,7 @@ AddToFunc   ChangeDesk
 
 DestroyFunc OreMoveRaise
 AddToFunc   OreMoveRaise
-+ I ThisWindow Move $0 w Warp
++ I ThisWindow Move $0 $1 Warp
 + I ThisWindow Raise
 
 DestroyFunc OreStartMaximized
@@ -132,33 +132,33 @@ AddToFunc OreMaximizeRaiseLower
 + I Current (Maximized) Raise
 + I Current (Maximized) Raise
 
-DestroyFunc OreMenu
-AddToFunc   OreMenu
-+ I OreUnbind-All
-+ I Menu $0
+#DestroyFunc OreMenu
+#AddToFunc   OreMenu
+#+ I OreUnbind-All
+#+ I Menu $0
 
-DestroyFunc OreExecUnbind
-AddToFunc   OreExecUnbind
-+ I Exec exec $0
-+ I OreUnbind-All
+#DestroyFunc OreExecUnbind
+#AddToFunc   OreExecUnbind
+#+ I Exec exec $0
+#+ I OreUnbind-All
 
-DestroyFunc Ore-SuperL-W
-AddToFunc   Ore-SuperL-W
-+ I Key right WFST n OreMoveUnbind right -0  w
-+ I Key  left WFST n OreMoveUnbind left  0  w
-+ I Key    up WFST n OreMoveUnbind up  w  0
-+ I Key  down WFST n OreMoveUnbind down  w -0
-#+ I key bracketright WFST n OreMoveToPageUnbind +1p bracketright
-#+ I key bracketleft  WFST n OreMoveToPageUnbind -1p bracketleft
-+ I key bracketleft  WFST n OreSnap 48 0
-+ I key bracketright  WFST n OreSnap 48 -0 
-+ I Key m WFST n OreMaximizeRaiseLowerUnbind 
-+ I key t WFST n OreRaiseLowerUnbind
-+ I key s WFST n OreStickUnbind
-+ I key c WFST n OreCloseUnbind
-+ I Key question WFST n OreMenu OreHelp-Ore-SuperL-W
-+ I key Escape WFST   n OreUnbind-All
-+ I Schedule 2000 OreUnbind-All
+#DestroyFunc Ore-SuperL-W
+#AddToFunc   Ore-SuperL-W
+#+ I Key right WFST n OreMoveUnbind right -0  w
+#+ I Key  left WFST n OreMoveUnbind left  0  w
+#+ I Key    up WFST n OreMoveUnbind up  w  0
+#+ I Key  down WFST n OreMoveUnbind down  w -0
+##+ I key bracketright WFST n OreMoveToPageUnbind +1p bracketright
+##+ I key bracketleft  WFST n OreMoveToPageUnbind -1p bracketleft
+#+ I key bracketleft  WFST n OreSnap 48 0
+#+ I key bracketright  WFST n OreSnap 48 -0 
+#+ I Key m WFST n OreMaximizeRaiseLowerUnbind 
+#+ I key t WFST n OreRaiseLowerUnbind
+#+ I key s WFST n OreStickUnbind
+#+ I key c WFST n OreCloseUnbind
+#+ I Key question WFST n OreMenu OreHelp-Ore-SuperL-W
+#+ I key Escape WFST   n OreUnbind-All
+#+ I Schedule 2000 OreUnbind-All
 
 DestroyFunc OreSnap
 AddToFunc   OreSnap
@@ -250,29 +250,28 @@ AddToFunc   OreUnbind-All
 # + I Key question     A A -
 # + I key Escape       A A -
 
-DestroyFunc OreDirectionFocusRaiseUnbind
-AddToFunc   OreDirectionFocusRaiseUnbind
-+ I OreUnbind-All
-+ I Direction $0 (AcceptsFocus) Focus
-+ I Current (!Raise) Raise 
+#DestroyFunc OreDirectionFocusRaiseUnbind
+#AddToFunc   OreDirectionFocusRaiseUnbind
+#+ I OreUnbind-All
+#+ I Direction $0 (AcceptsFocus) Focus
+#+ I Current (!Raise) Raise 
 
-DestroyFunc OreGotoPageUnbind
-AddToFunc   OreGotoPageUnbind
-+ I OreUnbind-All
-+ I GotoPage $0 $1
+#DestroyFunc OreGotoPageUnbind
+#AddToFunc   OreGotoPageUnbind
+#+ I OreUnbind-All
+#+ I GotoPage $0 $1
 
-DestroyFunc OreFocusRaiseUnbind
-AddToFunc   OreFocusRaiseUnbind
-+ I $0 (AcceptsFocus) Focus
-+ I Current (!Raise) Raise 
-+ I OreUnbind-All
+#DestroyFunc OreFocusRaiseUnbind
+#AddToFunc   OreFocusRaiseUnbind
+#+ I $0 (AcceptsFocus) Focus
+#+ I Current (!Raise) Raise 
+#+ I OreUnbind-All
 
 DestroyFunc OreRootMenu
 AddToFunc   OreRootMenu
 + I Current (!Firefox) Key Menu A A Menu MenuFvwmRoot
 + I Current (Firefox) Key Menu A A -
 + I Current (gnumeric) Key Menu A A -
-
 
 AddToFuntroyFunc OreResizeRaise
 AddToFunc   OreResizeRaise

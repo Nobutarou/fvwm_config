@@ -204,11 +204,18 @@ AddToMenu   MenuFvwmManPages "Help" Title
 DestroyMenu OreHelp
 AddToMenu   OreHelp
 + "Super-E:        Rofi Laucher" Exec exec rofi -show run -font 'Ruika Mplus 18' 
-+ "Super-←:       Move window to the left border" OreMoveRaise 0
-+ "Super-→:       Move window to the right border" OreMoveRaise -0
++ "Super-←:       Move window to the left border" OreMoveRaise 0 w
++ "Super-→:       Move window to the right border" OreMoveRaise -0 w
++ "Super-↑:       Move window to the top border" OreMoveRaise keep +0
++ "Super-↓:       Move window to the bottom border" OreMoveRaise keep -0
 + "Super+Shift+←: Resize by left border" OreResizeRaise West
 + "Super+Shift+→: Resize by right border" OreResizeRaise East
-+ "Super-Tab: Rofi Window Swither" 
++ "Super+Shift+↑: Resize by top border" OreResizeRaise North
++ "Super+Shift+↓: Resize by bottom border" OreResizeRaise South
++ "Super+M:        Toggle maximize" Maximize
++ "Super-Tab:      Rofi Window Swither" Exec exec rofi -show window -font 'Ruika Mplus 18'
++ "Super-C:        Close this window" Close
++ "Super-L:        Lock screen" Exec exec sflock -f -mplus-gothic-medium-r-normal--12-120-75-75-c-60-iso8859-1 
 
 #DestroyMenu OreHelp-Ore-SuperL-E
 #AddToMenu OreHelp-Ore-SuperL-E
