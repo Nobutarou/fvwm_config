@@ -45,10 +45,13 @@ key l A 4 Exec exec sflock -f -mplus-gothic-medium-r-normal--12-120-75-75-c-60-i
 key E A 4 Exec exec rofi -show run -font 'Ruika Mplus 18'
 key Left W 4 OreMoveRaise 0 
 key Right W 4 OreMoveRaise -0
-key Left W 4S Resize  direction West
-key Right W 4S Resize direction East
+
+# Once you push the super-shift-{left,right}, you enter the resize mode. 
+# You can just type {left,right} to resize the width. 
+key Left W 4S OreResizeRaise West
+key Right W 4S OreResizeRaise East
 key w A 4 Ore-SuperL-W
-key n A 4 Ore-SuperL-N
+# key n A 4 Ore-SuperL-N
 key question A 4 Menu OreHelp
 
 # Key Up    WTSF CS PackWrapperUp

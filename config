@@ -51,414 +51,7 @@ ImagePath +:$HOME/.local/share/icons/default
 #   + M [Action to do on a Mouse Motion]
 ###########
 
-# Start Function
-#
-# The start function is run right after fvwm is done reading
-# the config file. This function run after each restart
-# so using Test (Init) or Test (Restart) can further control
-# actions that are run during the first time run (Init) or
-# actions that are run after a restart.
-DestroyFunc StartFunction
-AddToFunc   StartFunction
-+ I Module FvwmButtons RightPanel
-+ I Module FvwmEvent EventNewDesk
-# AddToFunc   StartFunction
-# + I Test (Init, f $[FVWM_USERDIR]/.BGdefault) \
-#     Exec exec fvwm-root $[FVWM_USERDIR]/.BGdefault
-# + I TestRc (NoMatch) Exec exec fvwm-root \
-#     $[FVWM_DATADIR]/default-config/images/background/bg1.png
-# + I Test (Init) Module FvwmBanner
-# + I Module FvwmButtons RightPanel
-# + I Module FvwmEvent EventNewDesk
-
-# Function: MoveClickX $0 $1 $2
-#
-# This function runs variable actions on different events
-# and is used with the mouse bindings to allow different
-# actions depending on if the mouse is clicked, double clicked
-# or moved. Use "Nop" for no action.
-#
-#   $0 - Action on Mouse Hold + Move
-#   $1 - Action on Mouse Click
-#   $2 - Action on Mouse DoubleClick
-#
-#  Example: Mouse 1 T A MoveClickX Move Raise Maximize
-#
-#  Click title bar to raise, double click to maximize,
-#  and click+move to move the window.
-DestroyFunc MoveClickX
-AddToFunc   MoveClickX
-+ M $0
-+ C $1
-+ D $2
-
-# Function: ViewManPage $0
-#
-# This function loads the man page $0 in an terminal
-# and is used with the help menu.
-DestroyFunc ViewManPage
-AddToFunc   ViewManPage
-+ I Exec exec $[infostore.terminal] -g 80x40 \
-  -n "Manual Page - $0" -T "Manual Page - $0" -e man "$0"
-
-# Function: SetBG $0
-#
-# SetBG is used with the background menu to set the background
-# image and configure it to be loaded the next time fvwm is run.
-# Note, fvwm-root can't use .jpeg or resize images. Use something
-# like display, feh, etc.
-DestroyFunc SetBG
-AddToFunc   SetBG
-+ I Test (f $[FVWM_USERDIR]/images/background/$0) \
-    Exec exec fvwm-root $[FVWM_USERDIR]/images/background/$0
-+ I TestRc (Match) Exec exec ln -fs images/background/$0 \
-    $[FVWM_USERDIR]/.BGdefault
-+ I TestRc (Match) Break
-+ I Test (!f $[FVWM_DATADIR]/default-config/images/background/$0) Break
-+ I Exec exec fvwm-root $[FVWM_DATADIR]/default-config/images/background/$0
-+ I Exec exec ln -fs $[FVWM_DATADIR]/default-config/images/background/$0 \
-    $[FVWM_USERDIR]/.BGdefault
-
-
-# Function: IconManClick
-#
-# This function is run from FvwmIconMan when the button is clicked.
-DestroyFunc IconManClick
-AddToFunc   IconManClick
-# + I ThisWindow (Raised, !Shaded, !Iconic, CurrentPage) Iconify
-+ I ThisWindow (Raised, !Shaded, !Iconic, CurrentPage) Focus
-+ I TestRc (Match) Break
-+ I ThisWindow (!Raised) Raise
-+ I ThisWindow (Shaded) WindowShade
-+ I ThisWindow (Iconic) Iconify
-+ I ThisWindow (AcceptsFocus) FlipFocus
-
-# Function: ToggleTitle
-#
-# This function will toggle if fvwm shows the TitleBar.
-DestroyFunc ToggleTitle
-AddToFunc   ToggleTitle
-+ I ThisWindow (State 1) WindowStyle Title
-+ I TestRc (Match) State 1 False
-+ I TestRc (Match) Break
-+ I WindowStyle !Title
-+ I State 1 True
-
-# Function: ChangeDesk
-#
-# This function is called by FvwmEvent every time the Desk is changed.
-DestroyFunc ChangeDesk
-AddToFunc   ChangeDesk
-+ I SendToModule FvwmButtons ChangeButton desk0 Colorset 10
-+ I SendToModule FvwmButtons ChangeButton desk1 Colorset 10
-+ I SendToModule FvwmButtons ChangeButton desk2 Colorset 10
-+ I SendToModule FvwmButtons ChangeButton desk3 Colorset 10
-+ I SendToModule FvwmButtons ChangeButton desk$0 Colorset 11
-
-###### {{{ Pack Window Move
-# Name:     PackWindowLeft
-# Bound:    Alt+Shift+Left When a window is active
-# Purpose:  See PackWindowUp.
-#
-# The Logic works likes this:
-#   1. Set Destination to the Left Edge
-#   2. For every window, Run these tests:
-#               + Is the Window's Right edge further _Right_ than furthest edge seen yet?
-#       And:    + Is it's Right edge Further _Left_ than Target Windows Left edge? (ie,
-#in the way)
-#           Yes:
-#                   + Does the window start inside Target Window, and end below?
-#               Or  + Does it start above, and end inside?
-#               Or  + Is it the same vertical position/height/size, or start inside and
-#end inside?
-#               Or  + Does it start above, and end below?
-#                   Yes:
-#                       This is the new Destination.
-#                   No:
-#                       Nop
-#           No:
-#               Nop
-#   3. Move to Destination.
-#
-#################
-
-# DestroyFunc PackSetLowW
-# AddToFunc PackSetLowW
-# + I SetEnv low_w 0
-# + I All (CurrentPage,!Iconic,!Shaded) \
-# 	PipeRead "test `expr $[w.y] + $[w.height]` -gt $low_w \
-#         -a `expr $[w.y] + $[w.height]` -lt $0 \
-#         -a \\( \\( $[w.x] -ge $1 -a $[w.x] -lt `expr $1 + $2` \\) \
-#             -o \\( $1 -ge $[w.x] -a $1 -lt `expr $[w.x] + $[w.width]` \\) \
-#             -o \\( $1 -le $[w.x] -a `expr $1 + $2` -ge `expr $[w.x] + $[w.width]` \\) \
-#             -o \\( $[w.x] -le $1 -a `expr $[w.x] + $[w.width]` -ge `expr $1 + $2` \\) \
-#         \\) \
-#         && echo SetEnv low_w `expr $[w.y] + $[w.height]` \
-#         || echo Nop"
-#
-#
-# DestroyFunc PackSetHighW
-# AddToFunc PackSetHighW
-# + I SetEnv high_w $[vp.height]
-# + I All (CurrentPage,!iconic,AcceptsFocus,!Shaded) \
-# 	PipeRead "test $[w.y] -lt $high_w \
-#         -a $[w.y] -gt `expr $0 + $4`  \
-#         -a \\( \\( $[w.x] -ge $1 -a $[w.x] -lt `expr $1 + $2` \\) \
-#             -o \\( $1 -ge $[w.x] -a $1 -lt `expr $[w.x] + $[w.width]` \\) \
-#             -o \\( $1 -le $[w.x] -a `expr $1 + $2` -ge `expr $[w.x] + $[w.width]` \\) \
-#             -o \\( $[w.x] -le $1 -a `expr $[w.x] + $[w.width]` -ge `expr $1 + $2` \\) \
-#         \\) \
-#         && echo SetEnv high_w $[w.y] \
-#         || echo Nop"
-#
-#
-# DestroyFunc PackSetLeftW
-# AddToFunc PackSetLeftW
-# + I SetEnv left_w 0
-# + I All (CurrentPage,!Iconic,AcceptsFocus,!Shaded) \
-# 	PipeRead "test `expr $[w.x] + $[w.width]` -gt ${left_w} \
-#         -a `expr $[w.x] + $[w.width]` -lt $1 \
-#         -a \\( \\( $[w.y] -ge $0 -a $[w.y] -lt `expr $0 + $4` \\) \
-#             -o \\( $[w.y] -le $0 -a `expr $[w.y] + $[w.height]` -gt $0 \\) \
-#             -o \\( $[w.y] -ge $0 -a `expr $[w.y] + $[w.height]` -le `expr $0 + $4` \\) \
-#             -o \\( $[w.y] -le $0 -a `expr $[w.y] + $[w.height]` -ge `expr $0 + $4` \\) \
-#         \\) \
-#         && echo SetEnv left_w `expr $[w.x] + $[w.width]`  \
-#         || echo Nop"
-#
-# DestroyFunc PackSetRightW
-# AddToFunc PackSetRightW
-# + I SetEnv right_w $[vp.width]
-# + I All (CurrentPage,!Iconic,!Shaded) \
-# 	PipeRead "test $[w.x] -lt ${right_w} \
-#         -a $[w.x] -gt `expr $1 + $2` \
-#         -a \\( \\( $[w.y] -ge $0 -a $[w.y] -lt `expr $0 + $4` \\) \
-#             -o \\( $[w.y] -le $0 -a `expr $[w.y] + $[w.height]` -gt $0 \\) \
-#             -o \\( $[w.y] -ge $0 -a `expr $[w.y] + $[w.height]` -le `expr $0 + $4` \\) \
-#             -o \\( $[w.y] -le $0 -a `expr $[w.y] + $[w.height]` -ge `expr $0 + $4` \\) \
-#         \\) \
-#         && echo SetEnv right_w $[w.x] \
-#         || echo Nop"
-#
-#
-# DestroyFunc PackWindowDown
-# AddToFunc PackWindowDown
-# + I WindowId $3 Raise
-# + I PackSetHighW $0 $1 $2 $3 $4
-# + I PipeRead "echo WindowId $3 AnimatedMove keep `expr $[high_w] - $4`p"
-# + I WindowId $3 WarpToWindow 50 50
-# #+ I WindowId $3 RefreshWindow
-#
-#
-# DestroyFunc PackWindowUp
-# AddToFunc PackWindowUp
-# + I WindowId $3 Raise
-# + I PackSetLowW $0 $1 $2 $3 $4
-# + I WindowId $3 AnimatedMove keep $[low_w]p
-# + I WindowId $3 WarpToWindow 50 50
-# #+ I WindowId $3 RefreshWindow
-#
-#
-# DestroyFunc PackWindowLeft
-# AddToFunc PackWindowLeft
-# + I WindowId $3 Raise
-# + I PackSetLeftW $0 $1 $2 $3 $4
-# + I WindowId $3 AnimatedMove $[left_w]p keep
-# + I WindowId $3 WarpToWindow 50 50
-# #+ I WindowId $3 RefreshWindow
-#
-#
-# DestroyFunc PackWindowRight
-# AddToFunc PackWindowRight
-# + I WindowId $3 Raise
-# + I PackSetRightW $0 $1 $2 $3 $4
-# + I PipeRead "echo WindowId $3 AnimatedMove `expr ${right_w} - $2`p keep"
-# + I WindowId $3 WarpToWindow 50 50
-# #+ I WindowId $3 RefreshWindow
-#
-# DestroyFunc PackWrapperRight
-# AddToFunc PackWrapperRight I NoWindow PackWindowRight $[w.y] $[w.x] $[w.width] $[w.id] $[w.height]
-#
-# DestroyFunc  PackWrapperLeft
-# AddToFunc PackWrapperLeft I NoWindow PackWindowLeft $[w.y] $[w.x] $[w.width] $[w.id] $[w.height]
-#
-# DestroyFunc  PackWrapperDown
-# AddToFunc PackWrapperDown I NoWindow PackWindowDown $[w.y] $[w.x] $[w.width] $[w.id] $[w.height]
-#
-# DestroyFunc PackWrapperUp
-# AddToFunc PackWrapperUp
-# + I NoWindow PackWindowUp $[w.y] $[w.x] $[w.width] $[w.id]# }}}
-
-DestroyFunc OreMoveRaise
-AddToFunc   OreMoveRaise
-+ I ThisWindow Move $0 w Warp
-+ I ThisWindow Raise
-
-DestroyFunc OreStartMaximized
-AddToFunc OreStartMaximized
-+ I Exec exec $0
-+ I Wait $0
-+ I Next ($0, !Maximized) Maximize
-
-DestroyFunc OreMoveToPage
-AddToFunc   OreMoveToPage
-+ I MoveToPage 0 $0
-+ I GotoPage   0 $0
-
-DestroyFunc OreFocusRaise
-AddToFunc   OreFocusRaise
-+ I $0 (AcceptsFocus) Focus
-+ I Current (!Raise) Raise 
-
-DestroyFunc OreMaximizeRaiseLower
-AddToFunc OreMaximizeRaiseLower
-+ I Maximize 
-+ I Current (Maximized) Raise
-+ I Current (Maximized) Raise
-+ I Current (Maximized) Raise
-+ I Current (Maximized) Raise
-+ I Current (Maximized) Raise
-
-DestroyFunc OreMenu
-AddToFunc   OreMenu
-+ I OreUnbind-All
-+ I Menu $0
-
-DestroyFunc OreExecUnbind
-AddToFunc   OreExecUnbind
-+ I Exec exec $0
-+ I OreUnbind-All
-
-DestroyFunc Ore-SuperL-W
-AddToFunc   Ore-SuperL-W
-+ I Key right WFST n OreMoveUnbind right -0  w
-+ I Key  left WFST n OreMoveUnbind left  0  w
-+ I Key    up WFST n OreMoveUnbind up  w  0
-+ I Key  down WFST n OreMoveUnbind down  w -0
-#+ I key bracketright WFST n OreMoveToPageUnbind +1p bracketright
-#+ I key bracketleft  WFST n OreMoveToPageUnbind -1p bracketleft
-+ I key bracketleft  WFST n OreSnap 48 0
-+ I key bracketright  WFST n OreSnap 48 -0 
-+ I Key m WFST n OreMaximizeRaiseLowerUnbind 
-+ I key t WFST n OreRaiseLowerUnbind
-+ I key s WFST n OreStickUnbind
-+ I key c WFST n OreCloseUnbind
-+ I Key question WFST n OreMenu OreHelp-Ore-SuperL-W
-+ I key Escape WFST   n OreUnbind-All
-+ I Schedule 2000 OreUnbind-All
-
-DestroyFunc OreSnap
-AddToFunc   OreSnap
-+ I State 2 False
-+ I ThisWindow (Maximized) State 2 True
-+ I ThisWindow (!State 2) ResizeMoveMaximize $0 100 $1 0
-+ I ThisWindow (State 2) Maximize 
-+ I OreUnbind-All
-
-DestroyFunc OreCloseUnbind
-AddToFunc   OreCloseUnbind
-+ I Close
-+ I OreUnbind-All
-
-DestroyFunc OreStickUnbind
-AddToFunc   OreStickUnbind
-+ I Stick
-+ I OreUnbind-All
-
-DestroyFunc OreRaiseLowerUnbind 
-AddToFunc   OreRaiseLowerUnbind 
-+ I RaiseLower
-+ I OreUnbind-All
-
-DestroyFunc OreMaximizeRaiseLowerUnbind
-AddToFunc OreMaximizeRaiseLowerUnbind
-+ I Maximize 
-+ I Current (Maximized) Raise
-+ I OreUnbind-All
-
-DestroyFunc OreMoveUnbind
-AddToFunc   OreMoveUnbind
-+ I Move $1 $2 Warp
-+ I OreUnbind-All
-
-DestroyFunc OreMoveToPageUnbind
-AddToFunc   OreMoveToPageUnbind
-+ I MoveToPage 0  $0
-+ I GotoPage   0  $0
-+ I OreUnbind-All
-
-DestroyFunc Ore-SuperL-N
-AddToFunc Ore-SuperL-N
-+ I OreUnbind-All
-+ I key n        A n OreFocusRaiseUnbind          Next
-+ I key p        A n OreFocusRaiseUnbind          Prev
-+ I key Next     A n OreGotoPageUnbind            0 +1p
-+ I key Prior    A n OreGotoPageUnbind            0 -1p
-+ I key f        A C OreGotoPageUnbind            0 +1p
-+ I key b        A C OreGotoPageUnbind            0 -1p
-+ I key h        A n OreDirectionFocusRaiseUnbind West
-+ I key l        A n OreDirectionFocusRaiseUnbind East
-+ I Key question A n OreMenu                      OreHelp-Ore-SuperL-N
-+ I key Escape   A n OreUnbind-All
-+ I Schedule 2000 OreUnbind-All
-
-DestroyFunc OreUnbind-All
-AddToFunc   OreUnbind-All
-+ I DeSchedule 
-# Super-E
-+ I Key t        A n -
-+ I Key f        A n -
-+ I Key k        A n -
-+ I Key question A n -
-+ I key Escape   A n -
-# Super-W
-+ I Key right        WFST n -
-+ I Key left         WFST n -
-+ I Key up           WFST n -
-+ I Key down         WFST n -
-+ I key bracketright WFST n -
-+ I key bracketleft  WFST n -
-+ I Key m            WFST n -
-+ I key t            WFST n -
-+ I key s            WFST n -
-+ I key c            WFST n -
-+ I Key question     WFST n -
-+ I key Escape       WFST n -
-# Super-N
-+ I key n            A n -
-+ I key p            A n -
-+ I key Next         A n -
-+ I key Prior        A n -
-+ I key f A C -
-+ I key b A C -
-+ I key h A n -
-+ I key l A n -
-# Duplicated
-# + I Key question     A A -
-# + I key Escape       A A -
-
-DestroyFunc OreDirectionFocusRaiseUnbind
-AddToFunc   OreDirectionFocusRaiseUnbind
-+ I OreUnbind-All
-+ I Direction $0 (AcceptsFocus) Focus
-+ I Current (!Raise) Raise 
-
-DestroyFunc OreGotoPageUnbind
-AddToFunc   OreGotoPageUnbind
-+ I OreUnbind-All
-+ I GotoPage $0 $1
-
-DestroyFunc OreFocusRaiseUnbind
-AddToFunc   OreFocusRaiseUnbind
-+ I $0 (AcceptsFocus) Focus
-+ I Current (!Raise) Raise 
-+ I OreUnbind-All
-
-DestroyFunc OreRootMenu
-AddToFunc   OreRootMenu
-+ I Current (!Firefox) Key Menu A A Menu MenuFvwmRoot
-+ I Current (Firefox) Key Menu A A -
-+ I Current (gnumeric) Key Menu A A -
+Read functions.fvwm
 
 #############
 # 2: Styles #
@@ -610,42 +203,41 @@ AddToMenu   MenuFvwmManPages "Help" Title
 
 DestroyMenu OreHelp
 AddToMenu   OreHelp
-+ "Super-←: Move window to the left border" Move 0 w Warp
-+ "Super-→: Move window to the right border" Move -0 w Warp
-+ "Super+Shift+←: Resize by left border" Resize  direction West
-+ "Super+Shift+→: Resize by right border" Resize  direction East
-+ "Super-E: Exec command"       Menu OreHelp-Ore-SuperL-E
-+ "Super-W: Window arrangement" Menu OreHelp-Ore-SuperL-W
-+ "Super-N: Navigation"        Menu OreHelp-Ore-SuperL-N
++ "Super-E:        Rofi Laucher" Exec exec rofi -show run -font 'Ruika Mplus 18' 
++ "Super-←:       Move window to the left border" OreMoveRaise 0
++ "Super-→:       Move window to the right border" OreMoveRaise -0
++ "Super+Shift+←: Resize by left border" OreResizeRaise West
++ "Super+Shift+→: Resize by right border" OreResizeRaise East
++ "Super-Tab: Rofi Window Swither" 
 
-DestroyMenu OreHelp-Ore-SuperL-E
-AddToMenu OreHelp-Ore-SuperL-E
-+ "t: mlterm"   OreExecUnbind t mlterm
-+ "f: firefox"  OreExecUnbind f firefox
-+ "k: keepassx" OreExecUnbind k keepassx
+#DestroyMenu OreHelp-Ore-SuperL-E
+#AddToMenu OreHelp-Ore-SuperL-E
+#+ "t: mlterm"   OreExecUnbind t mlterm
+#+ "f: firefox"  OreExecUnbind f firefox
+#+ "k: keepassx" OreExecUnbind k keepassx
 
-DestroyMenu OreHelp-Ore-SuperL-W
-AddToMenu   OreHelp-Ore-SuperL-W
-#+ "→: Move window to right edge" OreMoveUnbind               right -0 w
-#+ "←: Move window to left edge"  OreMoveUnbind               right 0  w
-+ "↑: Move window to upper edge" OreMoveUnbind               right w  0
-+ "↓: Move window to upper edge" OreMoveUnbind               right w  -0
-+ "] : Snap to rignt"  OreSnap 47 -0 
-+ "[ : Snap to left"  OreSnap 47 0
-+ "m : Toggle maximize"           OreMaximizeRaiseLowerUnbind m
-+ "t : Toggle Raise Lower" OreRaiseLowerUnbind
-+ "c : Close" OreCloseUnbind
-
-DestroyMenu OreHelp-Ore-SuperL-N
-AddToMenu OreHelp-Ore-SuperL-N
-+ "n:   Focus to next window"   OreFocusRaiseUnbind Next
-+ "p:   Focus to prev window"   OreFocusRaiseUnbind Prev
-+ "PD:  Go to next page" OreGotoPageUnbind 0 +1p
-+ "PU:  Go to prev page"   OreGotoPageUnbind 0 -1p
-+ "c-f: Go to next page"      OreGotoPageUnbind 0 +1p
-+ "c-b: Go to prevn page"     OreGotoPageUnbind 0 -1p
-+ "h:   Focus to left window"   OreDirectionFocusRaiseUnbind West
-+ "l:   Focus to right window"  OreDirectionFocusRaiseUnbind East
+#DestroyMenu OreHelp-Ore-SuperL-W
+#AddToMenu   OreHelp-Ore-SuperL-W
+##+ "→: Move window to right edge" OreMoveUnbind               right -0 w
+##+ "←: Move window to left edge"  OreMoveUnbind               right 0  w
+#+ "↑: Move window to upper edge" OreMoveUnbind               right w  0
+#+ "↓: Move window to upper edge" OreMoveUnbind               right w  -0
+#+ "] : Snap to rignt"  OreSnap 47 -0 
+#+ "[ : Snap to left"  OreSnap 47 0
+#+ "m : Toggle maximize"           OreMaximizeRaiseLowerUnbind m
+#+ "t : Toggle Raise Lower" OreRaiseLowerUnbind
+#+ "c : Close" OreCloseUnbind
+#
+#DestroyMenu OreHelp-Ore-SuperL-N
+#AddToMenu OreHelp-Ore-SuperL-N
+#+ "n:   Focus to next window"   OreFocusRaiseUnbind Next
+#+ "p:   Focus to prev window"   OreFocusRaiseUnbind Prev
+#+ "PD:  Go to next page" OreGotoPageUnbind 0 +1p
+#+ "PU:  Go to prev page"   OreGotoPageUnbind 0 -1p
+#+ "c-f: Go to next page"      OreGotoPageUnbind 0 +1p
+#+ "c-b: Go to prevn page"     OreGotoPageUnbind 0 -1p
+#+ "h:   Focus to left window"   OreDirectionFocusRaiseUnbind West
+#+ "l:   Focus to right window"  OreDirectionFocusRaiseUnbind East
 
 #######
 # 5: Mouse and Key bindings
