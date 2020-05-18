@@ -55,7 +55,7 @@ key Right W 4S OreResizeRaise East
 key Up W 4S OreResizeRaise North
 key Down W 4S OreResizeRaise South
 
-key M W 4 Maximize
+key M W 4 OreMaximizeRaise
 
 key C W 4 Close
 key question A 4 Menu OreHelp

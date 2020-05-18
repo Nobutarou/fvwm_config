@@ -277,3 +277,9 @@ AddToFuntroyFunc OreResizeRaise
 AddToFunc   OreResizeRaise
 + I ThisWindow Resize direction $0 
 + I ThisWindow Raise
+
+DestroyFunc OreMaximizeRaise
+AddToFunc   OreMaximizeRaise
++ I ThisWindow Maximize
++ I ThisWindow Raise
+
