@@ -90,28 +90,6 @@ Style FvwmIdent WindowListSkip
 # Ore Styles
 Style * IconSize 48 48
 
-#DestroyModuleConfig FE-StartMaximised: *
-#*FE-StartMaximised: Cmd Function
-#*FE-StartMaximised: add_window FuncStartMaximised
-#
-#Module FvwmEvent FE-StartMaximised
-#    
-#DestroyFunc FuncStartMaximised
-#AddToFunc	FuncStartMaximised
-#+ I ThisWindow ("Zathura") Maximize 0 100
-##+ I ThisWindow ("DefendersQuest") Maximize 100 100
-
-#DestroyModuleConfig ToggleBorder: *
-#*ToggleBorder: Cmd Function
-#*ToggleBorder: focus_change FuncToggleBorder
-#
-#Module FvwmEvent ToggleBorder
-#
-#DestroyFunc FuncToggleBorder
-#AddToFunc	FuncToggleBorder
-#+ I ThisWindow WindowStyle Borders
-#+ I Prev WindowStyle !Borders
-
 # mlterm に title bar いらない。special-w left, right, m
 # で左右移動と最大化トグルできるようにしてあるから
 # mlterm の icon は mlterm 側で指定
@@ -140,4 +118,36 @@ Style fceux !Borders, !Title
 Style StardewValley.bin.x86_64 !Borders,!Title
 Style "microsoft teams - preview" !Title
 
+DestroyModuleConfig OreEventWarpWindow: *
+*OreEventWarpWindow: Cmd Function
+*OreEventWarpWindow: add_window OreWarpToWindow
 
+Module FvwmEvent OreEventWarpWindow
+
+DestroyFunc OreWarpToWindow
+AddToFunc OreWarpToWindow
++ I ThisWindow ("fontforge") WarpToWindow raise 50 50
+
+#DestroyModuleConfig FE-StartMaximised: *
+#*FE-StartMaximised: Cmd Function
+#*FE-StartMaximised: add_window FuncStartMaximised
+#
+#Module FvwmEvent FE-StartMaximised
+#    
+#DestroyFunc FuncStartMaximised
+#AddToFunc	FuncStartMaximised
+#+ I ThisWindow ("Zathura") Maximize 0 100
+##+ I ThisWindow ("DefendersQuest") Maximize 100 100
+
+#DestroyModuleConfig ToggleBorder: *
+#*ToggleBorder: Cmd Function
+#*ToggleBorder: focus_change FuncToggleBorder
+#
+#Module FvwmEvent ToggleBorder
+#
+#DestroyFunc FuncToggleBorder
+#AddToFunc	FuncToggleBorder
+#+ I ThisWindow WindowStyle Borders
+#+ I Prev WindowStyle !Borders
+
+# vim: set ft=fvwm :
