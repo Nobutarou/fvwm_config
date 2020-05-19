@@ -96,9 +96,8 @@ Style * IconSize 48 48
 #Style mlterm TitleAtTop
 # Style mlterm MiniIcon scalable/apps/terminal.svg:32x32, EWMHMiniIconOverride
 Style * !Borders, !Title
-Style mlterm !Title
-Style gnumeric !Title
-# Style Hacknet !Borders
+#Style mlterm !Title
+
 # Style Firefox MiniIcon scalable/apps/firefox.svg:32x32, EWMHMiniIconOverride
 Style Geeqie MiniIcon 48x48/apps/gnome-photos.svg:48x48, EWMHMiniIconOverride
 Style XTerm MiniIcon scalable/apps/xterm.svg:48x48, EWMHMiniIconOverride
@@ -108,15 +107,15 @@ Style Zathura MiniIcon 48x48/apps/evince.svg, EWMHMiniIconOverride, !Title
 Style feh MiniIcon 48x48/apps/feh.svg, EWMHMiniIconOverride, IconOverride
 Style Xmessage MiniIcon 48x48/apps/yast-messages.svg, EWMHMiniIconOverride, IconOverride
 Style lariza MiniIcon 48x48/apps/browser.svg, EWMHMiniIconOverride, IconOverride
-Style hollow_knight.x86_64 !Borders
+#Style hollow_knight.x86_64 !Borders
 Style DefendersQuest !Borders, !Title, MiniIcon 48x48/apps/steam.svg
 # firefox に title いらなくないかな。
-Style Firefox !Title
+#Style Firefox !Title
 Style Qemu-system-i386 MiniIcon 48x48/apps/vmware-player.svg, !Title
-Style Tangledeep.x86_64 !Borders, !Title
-Style fceux !Borders, !Title
-Style StardewValley.bin.x86_64 !Borders,!Title
-Style "microsoft teams - preview" !Title
+#Style Tangledeep.x86_64 !Borders, !Title
+#Style fceux !Borders, !Title
+#Style StardewValley.bin.x86_64 !Borders,!Title
+#Style "microsoft teams - preview" !Title
 
 DestroyModuleConfig OreEventWarpWindow: *
 *OreEventWarpWindow: Cmd Function

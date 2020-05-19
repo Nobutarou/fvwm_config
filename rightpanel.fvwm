@@ -54,7 +54,6 @@ DestroyModuleConfig FvwmPager:*
 # is used as the window list in the panel or taskbar.
 DestroyModuleConfig FvwmIconMan:*
 *FvwmIconMan: UseWinList true
-#*FvwmIconMan: ButtonGeometry 60x60
 *FvwmIconMan: ButtonGeometry 60x0
 *FvwmIconMan: Colorset 10
 *FvwmIconMan: FocusColorset 11

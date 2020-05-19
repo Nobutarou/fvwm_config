@@ -41,15 +41,22 @@ key XF86AudioRaiseVolume  A A Exec exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 key XF86AudioMute         A A Exec exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 key r A 4  Exec exec rofi-pass
 key l A 4 Exec exec sflock -f -mplus-gothic-medium-r-normal--12-120-75-75-c-60-iso8859-1 
-
 key E A 4 Exec exec rofi -show run -font 'Ruika Mplus 18'
+key Print A A Exec exec flameshot gui
+
 key Left  W 4 OreMoveRaise 0 w
 key Right W 4 OreMoveRaise -0 w
 key Up    W 4 OreMoveRaise keep +0 
 key Down  W 4 OreMoveRaise keep -0 
 
+key J W 4 Lower
+key K W 4 Raise
+key N W 4 Next (AcceptsFocus) Focus
+key P W 4 Prev (AcceptsFocus) Focus
+
 # Once you push the super-shift-{left,right}, you enter the resize mode. 
 # You can just type {left,right} to resize the width. 
+# To accept the resize, "Return". To cancel, "Esc"
 key Left W 4S OreResizeRaise West
 key Right W 4S OreResizeRaise East
 key Up W 4S OreResizeRaise North
@@ -92,3 +99,4 @@ Mouse 3	T    A RaiseLower
 Mouse 3 I    A Menu MenuIconOps
 Mouse 1 A 4 MoveClickX Resize Raise Nop
 Mouse 3 A 4 MoveClickX Move Raise Maximize
+# vim: set ft=fvwm :
