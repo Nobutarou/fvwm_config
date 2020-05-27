@@ -127,16 +127,17 @@ DestroyFunc OreWarpToWindow
 AddToFunc OreWarpToWindow
 + I ThisWindow ("fontforge") WarpToWindow raise 50 50
 
-#DestroyModuleConfig FE-StartMaximised: *
-#*FE-StartMaximised: Cmd Function
-#*FE-StartMaximised: add_window FuncStartMaximised
-#
-#Module FvwmEvent FE-StartMaximised
-#    
-#DestroyFunc FuncStartMaximised
-#AddToFunc	FuncStartMaximised
-#+ I ThisWindow ("Zathura") Maximize 0 100
-##+ I ThisWindow ("DefendersQuest") Maximize 100 100
+DestroyModuleConfig OreStartMaximised: *
+*OreStartMaximised: Cmd Function
+*OreStartMaximised: add_window FuncStartMaximised
+
+Module FvwmEvent OreStartMaximised
+    
+DestroyFunc FuncStartMaximised
+AddToFunc	FuncStartMaximised
++ I ThisWindow ("Luakit") Maximize 0 100
++ I ThisWindow ("Luakit") Maximize forget
+#+ I ThisWindow ("DefendersQuest") Maximize 100 100
 
 #DestroyModuleConfig ToggleBorder: *
 #*ToggleBorder: Cmd Function
