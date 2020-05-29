@@ -117,37 +117,5 @@ Style Qemu-system-i386 MiniIcon 48x48/apps/vmware-player.svg, !Title
 #Style StardewValley.bin.x86_64 !Borders,!Title
 #Style "microsoft teams - preview" !Title
 
-DestroyModuleConfig OreEventWarpWindow: *
-*OreEventWarpWindow: Cmd Function
-*OreEventWarpWindow: add_window OreWarpToWindow
-
-Module FvwmEvent OreEventWarpWindow
-
-DestroyFunc OreWarpToWindow
-AddToFunc OreWarpToWindow
-+ I ThisWindow ("fontforge") WarpToWindow raise 50 50
-
-DestroyModuleConfig OreStartMaximised: *
-*OreStartMaximised: Cmd Function
-*OreStartMaximised: add_window FuncStartMaximised
-
-Module FvwmEvent OreStartMaximised
-    
-DestroyFunc FuncStartMaximised
-AddToFunc	FuncStartMaximised
-+ I ThisWindow ("Luakit") Maximize 0 100
-+ I ThisWindow ("Luakit") Maximize forget
-#+ I ThisWindow ("DefendersQuest") Maximize 100 100
-
-#DestroyModuleConfig ToggleBorder: *
-#*ToggleBorder: Cmd Function
-#*ToggleBorder: focus_change FuncToggleBorder
-#
-#Module FvwmEvent ToggleBorder
-#
-#DestroyFunc FuncToggleBorder
-#AddToFunc	FuncToggleBorder
-#+ I ThisWindow WindowStyle Borders
-#+ I Prev WindowStyle !Borders
 
 # vim: set ft=fvwm :

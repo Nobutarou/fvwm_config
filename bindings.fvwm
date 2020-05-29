@@ -43,6 +43,8 @@ key r A 4  Exec exec rofi-pass
 key l A 4 Exec exec sflock -f -mplus-gothic-medium-r-normal--12-120-75-75-c-60-iso8859-1 
 key E A 4 Exec exec rofi -show run -font 'Ruika Mplus 18'
 key Print A A Exec exec flameshot gui
+key (lariza) H A M Exec exec lariza_history_rofi
+key (lariza) B A M Exec exec lariza_bookmark_rofi
 
 key Left  W 4 OreMoveRaise 0 w
 key Right W 4 OreMoveRaise -0 w
