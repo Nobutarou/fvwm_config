@@ -344,9 +344,9 @@ DestroyModuleConfig EventNewDesk:*
 *FvwmScript: DefaultFont '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
 
 # When focus is changed, call OreRootMenu to change Menu key binding
-DestroyModuleConfig OreMenuKeyBind: *
-*OreMenuKeyBind: Cmd Function
-*OreMenuKeyBind: focus_change OreRootMenu
-Module FvwmEvent OreMenuKeyBind
+#DestroyModuleConfig OreMenuKeyBind: *
+#*OreMenuKeyBind: Cmd Function
+#*OreMenuKeyBind: focus_change OreRootMenu
+#Module FvwmEvent OreMenuKeyBind
 
 # vim: set fdm=marker ft=fvwm : 

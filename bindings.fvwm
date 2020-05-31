@@ -27,10 +27,13 @@
 # Menu key is bound by FvwmEvent OreMenuKeyBind
 # Silent Key F1 A M Menu MenuFvwmRoot
 
-Silent Key Menu A 4 Menu MenuFvwmRoot
+#Silent Key (!firefox) Menu A 4 Menu MenuFvwmRoot
+#Silent Key (!gnumeric) Menu A 4 Menu MenuFvwmRoot
 Silent Key Tab A M WindowList Root c c NoDeskSort, SelectOnRelease Meta_L
 key Tab A 4 Exec exec rofi -show window -font 'Ruika Mplus 18'
 key q A 4 Module FvwmScript OreScript-ConfirmQuit
+Key Menu A 4 Menu MenuFvwmRoot
+Key (mlterm) Menu A N Menu MenuFvwmRoot
 
 # When I use startx from tty, pushing XF86MonBrightness* hangs some keys and
 # mouse buttons. To avoid them, I use menu key instead.
@@ -43,8 +46,9 @@ key r A 4  Exec exec rofi-pass
 key l A 4 Exec exec sflock -f -mplus-gothic-medium-r-normal--12-120-75-75-c-60-iso8859-1 
 key E A 4 Exec exec rofi -show run -font 'Ruika Mplus 18'
 key Print A A Exec exec flameshot gui
-key (lariza) H A M Exec exec lariza_history_rofi
-key (lariza) B A M Exec exec lariza_bookmark_rofi
+key (lariza) H A M Exec exec lariza_history_rofi 
+key (lariza) B A M Exec exec lariza_bookmark_rofi OreLariza
+key (Firefox) B A C Exec exec lariza_bookmark_rofi firefox
 
 key Left  W 4 OreMoveRaise 0 w
 key Right W 4 OreMoveRaise -0 w

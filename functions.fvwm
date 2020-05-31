@@ -267,11 +267,11 @@ AddToFunc   OreUnbind-All
 #+ I Current (!Raise) Raise 
 #+ I OreUnbind-All
 
-DestroyFunc OreRootMenu
-AddToFunc   OreRootMenu
-+ I Current (!Firefox) Key Menu A A Menu MenuFvwmRoot
-+ I Current (Firefox) Key Menu A A -
-+ I Current (gnumeric) Key Menu A A -
+#DestroyFunc OreRootMenu
+#AddToFunc   OreRootMenu
+#+ I Current (!Firefox) Key Menu A A Menu MenuFvwmRoot
+#+ I Current (Firefox) Key Menu A A -
+#+ I Current (gnumeric) Key Menu A A -
 
 AddToFuntroyFunc OreResizeRaise
 AddToFunc   OreResizeRaise
