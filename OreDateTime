@@ -1,6 +1,7 @@
 WindowTitle {DateTime}
-WindowSize  120 65
-Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
+WindowSize  120 100
+#Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
+Font 'xft:源ノ角ゴシック Code JP:Medium:size=12:antialias=True"'
 
 Init
  Begin
@@ -38,8 +39,9 @@ End
 Widget 1
 Property
  Position 0 0
- Size 120 12
-  Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
+ Size 120 15
+Font 'xft:源ノ角ゴシック Code JP:Medium:pixelsize=12:antialias=True"'
+ #Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
  Type ItemDraw
  Flags NoReliefString
  Title {}
@@ -52,9 +54,10 @@ End
 
 Widget 2
 Property
- Position 0 12
- Size 120 12
-  Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
+ Position 0 15
+ Size 120 15
+Font 'xft:源ノ角ゴシック Code JP:Medium:pixelsize=12:antialias=True"'
+ # Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
  Type ItemDraw
  Flags NoReliefString
  Title {}
@@ -67,9 +70,10 @@ End
 
 Widget 3
 Property
- Position 0 24
- Size 120 12
-  Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
+ Position 0 30
+ Size 120 15
+Font 'xft:源ノ角ゴシック Code JP:Medium:pixelsize=12:antialias=True"'
+ # Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
  Type ItemDraw
  Flags NoReliefString
  Title {}
@@ -82,9 +86,10 @@ End
 
 Widget 4
 Property
- Position 0 36
- Size 120 12
-  Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
+ Position 0 45
+ Size 120 15
+Font 'xft:源ノ角ゴシック Code JP:Medium:pixelsize=12:antialias=True"'
+ # Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
  Type ItemDraw
  Flags NoReliefString
  Title {}
@@ -97,9 +102,10 @@ End
 
 Widget 5
 Property
- Position 0 48
- Size 120 12
-  Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
+ Position 0 60
+ Size 120 15
+Font 'xft:源ノ角ゴシック Code JP:Medium:pixelsize=12:antialias=True"'
+ # Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
  Type ItemDraw
  Flags NoReliefString
  Title {}

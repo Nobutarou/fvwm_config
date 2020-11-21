@@ -2,7 +2,7 @@
 #
 # Note - To use the system tray you must have "stalonetray" installed.
 DestroyModuleConfig RightPanel:*
-*RightPanel: Geometry 60x$[vp.height]-0+0
+*RightPanel: Geometry 65x$[vp.height]-0+0
 # I want to calculate vp.height-50 but I don't know the syntax.
 #*RightPanel: Geometry 60x720-0+0
 *RightPanel: Colorset 10
@@ -54,7 +54,7 @@ DestroyModuleConfig FvwmPager:*
 # is used as the window list in the panel or taskbar.
 DestroyModuleConfig FvwmIconMan:*
 *FvwmIconMan: UseWinList true
-*FvwmIconMan: ButtonGeometry 60x0
+*FvwmIconMan: ButtonGeometry 65x0
 *FvwmIconMan: Colorset 10
 *FvwmIconMan: FocusColorset 11
 *FvwmIconMan: FocusAndSelectColorset 12
@@ -64,13 +64,15 @@ DestroyModuleConfig FvwmIconMan:*
 *FvwmIconMan: ReliefThickness 0
 #*FvwmIconMan: Format "%t"
 *FvwmIconMan: Format "%c:%i"
-*FvwmIconMan: Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
+#*FvwmIconMan: Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
+*FvwmIconMan: Font 'xft:源ノ角ゴシック Code JP:Medium:pixelsize=12:antialias=True"'
 *FvwmIconMan: Action Mouse 1 A sendcommand IconManClick
 *FvwmIconMan: Action Mouse 2 A sendcommand Nop
 *FvwmIconMan: Action Mouse 3 A sendcommand "Menu MenuIconOps"
 *FvwmIconMan: Resolution global
 *FvwmIconMan: Tips needed
-*FvwmIconMan: TipsFont '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
+#*FvwmIconMan: TipsFont '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
+*FvwmIconMan: TipsFont 'xft:源ノ角ゴシック Code JP:Medium:pixelsize=12:antialias=True"'
 *FvwmIconMan: Action Mouse 1 A sendcommand IconManClick
 *FvwmIconMan: TipsDelays 0 0
 *FvwmIconMan: Sort id

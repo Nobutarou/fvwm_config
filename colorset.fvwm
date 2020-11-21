@@ -31,8 +31,10 @@ Colorset 5  fg #000000, bg #ffffff, hi, sh, Plain, NoShape
 Colorset 6  fg #ffffff, bg #2d2d2d, hi, sh, Plain, NoShape
 Colorset 7  fg grey30, bg #ffffff, hi, sh, Plain, NoShape
 Colorset 8  fg #ffffff, bg #003c3c, hi, sh, Plain, NoShape
-#Colorset 10 fg #ffffff, bg #003c3c, hi #aaaaaa, sh #999999, Plain, NoShape
-Colorset 10 fg #ffffff, bg #0b1c2c, hi #aaaaaa, sh #999999, Plain, NoShape
-Colorset 11 fg #ffffff, bg #1a6e99, hi #ffffff, sh #ffffff, Plain, NoShape
-Colorset 12 fg #2d2d2d, bg #ffffff, hi, sh, Plain, NoShape
+#Colorset 10 fg #ffffff, bg #0b1c2c, hi #aaaaaa, sh #999999, Plain, NoShape
+Colorset 10 fg #181818, bg #d8d8d8, hi #aaaaaa, sh #999999, Plain, NoShape
+#Colorset 11 fg #ffffff, bg #1a6e99, hi #ffffff, sh #ffffff, Plain, NoShape
+Colorset 11 fg #181818, bg #86c1b9, hi #ffffff, sh #ffffff, Plain, NoShape
+#Colorset 12 fg #2d2d2d, bg #ffffff, hi, sh, Plain, NoShape
+Colorset 12 fg #181818, bg #A1B56C, hi, sh, Plain, NoShape
 Colorset 13 fg #ffffff, bg #006c6c, hi, sh, Plain, NoShape

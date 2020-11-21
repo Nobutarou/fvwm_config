@@ -203,8 +203,8 @@ AddToMenu   MenuFvwmManPages "Help" Title
 
 DestroyMenu OreHelp
 AddToMenu   OreHelp
-+ "Super-E:        Rofi Laucher" Exec exec rofi -show run -font 'Ruika Mplus 18' 
-+ "Super-Tab:      Rofi Window Swither" Exec exec rofi -show window -font 'Ruika Mplus 18'
++ "Super-E:        Rofi Laucher" Exec exec rofi -show run -font 'ＭＳ Ｐゴシック 18' 
++ "Super-Tab:      Rofi Window Swither" Exec exec rofi -show window -font 'ＭＳ Ｐゴシック 18'
 + "-----------------------------------------------"
 + "Super-←:       Move window to the left border" OreMoveRaise 0 w
 + "Super-→:       Move window to the right border" OreMoveRaise -0 w
