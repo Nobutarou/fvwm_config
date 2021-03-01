@@ -43,7 +43,7 @@ key XF86AudioLowerVolume  A A Exec exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 key XF86AudioRaiseVolume  A A Exec exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 key XF86AudioMute         A A Exec exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 key r A 4  Exec exec rofi-pass
-key l A 4 Exec exec slock
+key l A 4 Exec exec sflock -f fixed
 key E A 4 Exec exec rofi -show run -font '源ノ角ゴシック Code JP 12'
 key Print A A Exec exec flameshot gui
 key (lariza) H A M Exec exec lariza_history_rofi 
