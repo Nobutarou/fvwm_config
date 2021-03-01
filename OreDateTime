@@ -1,7 +1,7 @@
 WindowTitle {DateTime}
 WindowSize  120 100
 #Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
-Font 'xft:源ノ角ゴシック Code JP:Medium:size=12:antialias=True"'
+Font 'xft:源ノ角ゴシック Code JP:Medium:pixelsize=12:antialias=True"'
 
 Init
  Begin

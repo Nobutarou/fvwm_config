@@ -46,8 +46,8 @@ MoveThreshold 3
 Style * SloppyFocus, MouseFocusClickRaises
 
 # Default Font
-#DefaultFont "xft:mplus mono:Medium:size=8:antialias=false"
-DefaultFont '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
+DefaultFont 'xft:源ノ角ゴシック Code JP:Medium:pixelsize=12:antialias=True"'
+#DefaultFont '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
 # Window Placement
 Style * TileCascadePlacement, GrabFocusOff, !UsePPosition
 

@@ -43,12 +43,13 @@ key XF86AudioLowerVolume  A A Exec exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 key XF86AudioRaiseVolume  A A Exec exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 key XF86AudioMute         A A Exec exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 key r A 4  Exec exec rofi-pass
-key l A 4 Exec exec sflock -f -mplus-gothic-medium-r-normal--12-120-75-75-c-60-iso8859-1 
+key l A 4 Exec exec slock
 key E A 4 Exec exec rofi -show run -font '源ノ角ゴシック Code JP 12'
 key Print A A Exec exec flameshot gui
 key (lariza) H A M Exec exec lariza_history_rofi 
 key (lariza) B A M Exec exec lariza_bookmark_rofi OreLariza
 key (Firefox) B A C Exec exec lariza_bookmark_rofi firefox
+key (Nightly) B A C Exec exec lariza_bookmark_rofi firefox
 key (otter-browser) B A C Exec exec lariza_bookmark_rofi otter-browser
 
 key Left  W 4 OreMoveRaise 0 w

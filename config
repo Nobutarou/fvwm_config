@@ -73,7 +73,8 @@ MenuStyle * MenuColorset 5, ActiveColorset 6, GreyedColorset 7, TitleColorset 8
 MenuStyle * Hilight3DOff, HilightBack, HilightTitleBack, SeparatorsLong
 MenuStyle * TrianglesSolid, TrianglesUseFore
 MenuStyle * ItemFormat "%|%3.1i%5.3l%5.3>%|"
-MenuStyle * Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
+#MenuStyle * Font '-mplus-gothic-medium-r-normal--10-100-75-75-*-*-*-*'
+MenuStyle * Font 'xft:源ノ角ゴシック Code JP:Medium:pixelsize=12:antialias=True"'
 
 # Root Menu
 #
